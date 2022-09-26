@@ -1,7 +1,10 @@
 package com.example.myapplication.controller;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.annotation.Nullable;
@@ -33,6 +36,20 @@ public class HomeActivity extends Activity {
         ListView listViewCompraItem = findViewById(R.id.list_view_compra_item);
         listViewCompraItem.setAdapter(adapter);
 
+        listViewCompraItem.setClickable(true);
+        listViewCompraItem.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(HomeActivity.this, NovasActivity.class);
+
+                intent.putExtra("title", compraItemList.get(position).getTitulo());
+                intent.putExtra("descricao", compraItemList.get(position).getDescricao());
+
+
+                startActivity(intent);
+            }
+        });
     }
 }
+
 
